@@ -1,0 +1,15 @@
+Welcome to NEVARB technical coding question. The intent behind our question is to give you something that you can finish in a relatively short amount of time but that also would let you showcase your ability. You will be modifying a class to play the game Hangman!
+
+You can find the framework of the game in our rudimentary play.rb file. In that file, the framework is written in the Game class, which keeps track of the word to be guessed, the number of guesses so far, and the maximum number of guesses allowed.
+
+You will implement the Player's prepare and next_guess methods to play the game more strategically than the included strategy of guessing random letters.
+
+We've included a Dockerfile, which we have used to run this code successfully. If you are familiar with Docker and would like to run your code in our tested environment, you can use the following command to build the Docker image:
+
+`docker build -t hangman .`
+
+Once built, you can run it with
+
+`docker run hangman`
+
+When you change the code in play.rb, you will need to rebuild the image each time before you run it again. We recommend you not use Docker if you aren't familiar with it yet. After all, you only have 2 hours to work on implementing the best Hangman player ever. We look forward to seeing what you can do.
