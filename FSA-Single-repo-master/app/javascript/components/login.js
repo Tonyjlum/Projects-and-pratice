@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 
 class Login extends Component {
   state = {
@@ -26,7 +27,10 @@ class Login extends Component {
       })
     })
     .then( response => response.json())
-    .then( user => console.log(user))
+    .then( user => {
+      console.log(user)
+      this.props.history.push("/register")
+    })
   }
 
   render() {
@@ -63,4 +67,4 @@ class Login extends Component {
 
 }
 
-export default Login;
+export default withRouter((Login));

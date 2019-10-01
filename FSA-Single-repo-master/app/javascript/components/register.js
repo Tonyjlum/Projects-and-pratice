@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 
 class Register extends Component {
   state = {
@@ -29,7 +30,14 @@ class Register extends Component {
       })
     })
     .then( response => response.json())
-    .then( user => console.log(user))
+    .then( user => {
+      console.log(user)
+      if (user.id > 0){
+        this.props.history.push("/")
+      } else {
+        window.confirm(`That Email address is already in use. Please login with ${this.state.email} or try a different email.`)
+      }
+    })
   }
 
   render() {
@@ -73,4 +81,4 @@ class Register extends Component {
 
 }
 
-export default Register;
+export default withRouter((Register));
