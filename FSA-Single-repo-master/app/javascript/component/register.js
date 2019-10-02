@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 
-class Login extends Component {
+class Register extends Component {
   state = {
     email: "",
     password: "",
+    name: ""
 }
 
   handleChange = (e) => {
@@ -13,13 +14,14 @@ class Login extends Component {
     })
   }
 
-  handleNewAccount = () => {
-    this.props.history.push("/register")
+  handleLogin = () => {
+    this.props.history.push("/")
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    fetch("http://localhost:3000/v1/login",{
+    // console.log(this.state)
+    fetch("http://localhost:3000/v1/register",{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,21 +29,12 @@ class Login extends Component {
       },
       body: JSON.stringify({
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        name: this.state.name
       })
     })
     .then( response => response.json())
-    .then( user => {
-      console.log(user)
-      if (user.id > 0){
-        this.props.setUser(user)
-        this.props.history.push("/portfolio")
-      } else {
-        window.confirm(`That Email and/or password is incorrect. Please try again.`)
-      }
 
-      // this.props.history.push("/register")
-    })
   }
 
   render() {
@@ -51,7 +44,14 @@ class Login extends Component {
           className= "login-form"
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}>
-          <h2 className="center-text">Sign In</h2>
+          <h2 className="center-text">Register a new Account</h2>
+          <input
+            className="form-input"
+            id="name"
+            placeholder="Name"
+            value={this.state.name}
+            required/>
+          <br/>
           <input
             className="form-input"
             id="email"
@@ -70,16 +70,16 @@ class Login extends Component {
           <input
             className="button"
             type="submit"
-            value="Login"/>
+            value="Create New Account"/>
         </form>
         <button
           id="register-button"
-          onClick={this.handleNewAccount}
-        >Register</button>
+          onClick={this.handleLogin}
+        >Login</button>
       </div>
     );
   }
 
 }
 
-export default withRouter((Login));
+export default withRouter((Register));

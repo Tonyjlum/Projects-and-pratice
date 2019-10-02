@@ -8,13 +8,9 @@ class V1::UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(email: user_params["email"], password: user_params["password"] )
+    @user = User.find_by(email: user_params["email"], password: user_params["password"])
     if @user
-      render json: @user.to_json(only: [:id],
-        include:[transactions: {only:[:id, :stock_id, :stock_price, :shares, :transactions_type]
-          }]
-
-        )
+      render json: @user
     else
       render json: {id:0, errors: "Incorrect email or password. Please try again."}
     end
@@ -30,7 +26,7 @@ class V1::UsersController < ApplicationController
     params["email"] = email_downcase(params["email"])
     @user = User.create(user_params)
     if @user.id
-      render json: @user
+      render json: @user.id
     else
       render json: {id:0, errors: "Email address already in use. Please login or make use a different email."}
     end

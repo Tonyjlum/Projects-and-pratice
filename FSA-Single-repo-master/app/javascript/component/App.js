@@ -15,15 +15,17 @@ class App extends React.Component {
   state = {
     id: 0,
     user: null,
+    budget: 0,
     transactions: []
   }
 
   setUser = (login) =>{
-    console.log(login)
     this.setState({
-      id: login.id,
-      transactions: login.transactions
-    }, () => {console.log(this.state, "after login")})
+      id: login.user.id,
+      balance: login.user.balance,
+      user: login.user.name,
+      transactions: login.user.transactions
+    })
 
   }
 
@@ -34,8 +36,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" render={() => <Login setUser={this.setUser}/>}/>
           <Route exact path="/register" render={() => <Register />}/>
-          // <Route path="/hello" render={() => <HelloWorld greeting="Friend"/>} />
-          <Route exact path="/portfolio" render ={() => <Portfolio />}/>
+          <Route exact path="/portfolio" render ={() => <Portfolio user={this.state}/>}/>
         </Switch>
       </BrowserRouter>
     );

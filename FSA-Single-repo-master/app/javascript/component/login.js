@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 
-class Register extends Component {
+class Login extends Component {
   state = {
     email: "",
     password: "",
-    name: ""
 }
 
   handleChange = (e) => {
@@ -14,14 +13,13 @@ class Register extends Component {
     })
   }
 
-  handleLogin = () => {
-    this.props.history.push("/")
+  handleNewAccount = () => {
+    this.props.history.push("/register")
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    // console.log(this.state)
-    fetch("http://localhost:3000/v1/register",{
+    fetch("http://localhost:3000/v1/login",{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,17 +27,16 @@ class Register extends Component {
       },
       body: JSON.stringify({
         email: this.state.email,
-        password: this.state.password,
-        name: this.state.name
+        password: this.state.password
       })
     })
     .then( response => response.json())
     .then( user => {
-      console.log(user)
-      if (user.id > 0){
-        this.props.history.push("/")
+      if (user.user.id > 0){
+        this.props.setUser(user)
+        this.props.history.push("/portfolio")
       } else {
-        window.confirm(`That Email address is already in use. Please login with ${this.state.email} or try a different email.`)
+        window.confirm(`That Email and/or password is incorrect. Please try again.`)
       }
     })
   }
@@ -51,14 +48,7 @@ class Register extends Component {
           className= "login-form"
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}>
-          <h2 className="center-text">Register a new Account</h2>
-          <input
-            className="form-input"
-            id="name"
-            placeholder="Name"
-            value={this.state.name}
-            required/>
-          <br/>
+          <h2 className="center-text">Sign In</h2>
           <input
             className="form-input"
             id="email"
@@ -77,16 +67,16 @@ class Register extends Component {
           <input
             className="button"
             type="submit"
-            value="Create New Account"/>
+            value="Login"/>
         </form>
         <button
           id="register-button"
-          onClick={this.handleLogin}
-        >Login</button>
+          onClick={this.handleNewAccount}
+        >Register</button>
       </div>
     );
   }
 
 }
 
-export default withRouter((Register));
+export default withRouter((Login));
