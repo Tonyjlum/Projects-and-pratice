@@ -8,5 +8,9 @@
 
 User.create(name: "Tony", password:"greentea", email: "tonyjlum@gmail.com")
 
-Transaction.create(ticker_symbol: "TEST", stock_price: 33.91, shares: 11, user_id: 1)
-Transaction.create(ticker_symbol: "REST", stock_price: 9.91, shares: 40, user_id: 1)
+Stock.create(ticker_symbol: "NFLX")
+Stock.create(ticker_symbol: "ATT")
+
+Transaction.create(stock_id: "1", stock_price: 33.91, shares: 11, user_id: 1)
+Transaction.create(stock_id: "2", stock_price: 9.91, shares: 40, user_id: 1)
+Transaction.create(stock_id: "2", stock_price: 7.63, shares: 21, user_id: 1)

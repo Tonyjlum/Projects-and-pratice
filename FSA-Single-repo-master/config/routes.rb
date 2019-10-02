@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     # get 'users', to: 'users#index'
     resources :transactions
     resources :users
+    resources :stocks
+
     post "/login", to:"users#login"
     post "/register", to:"users#create"
   end

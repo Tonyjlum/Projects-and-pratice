@@ -1,10 +1,12 @@
 class CreateTransactions < ActiveRecord::Migration[5.2]
   def change
     create_table :transactions do |t|
-      t.string :ticker_symbol
+      t.integer :user_id
+      t.integer :stock_id
       t.float  :stock_price
       t.integer :shares
-      t.integer :user_id
+      #to track if the transactions was to buy or sell.
+      t.string :transactions_type, :default => "BUY"
       t.timestamps
     end
   end
