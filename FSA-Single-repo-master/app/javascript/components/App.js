@@ -7,6 +7,8 @@ import {BrowserRouter, Switch, Route} from "react-router-dom"
 import HelloWorld from './HelloWorld.js'
 import Login from './login.js'
 import Register from './register'
+import Portfolio from './portfolio'
+
 
 class App extends React.Component {
   state = {
@@ -22,8 +24,8 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" render={() => <Login />}/>
           <Route exact path="/register" render={() => <Register />}/>
-
-          <Route path="/hello" render={() => <HelloWorld greeting="Friend"/>} />
+          // <Route path="/hello" render={() => <HelloWorld greeting="Friend"/>} />
+          <Route exact path="/portfolio" render ={() => <Portfolio />}/>
         </Switch>
       </BrowserRouter>
     );

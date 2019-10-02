@@ -33,9 +33,13 @@ class Login extends Component {
     .then( response => response.json())
     .then( user => {
       console.log(user)
-      //push in to stock page
+      if (user.id > 0){
+        this.props.history.push("/portfolio")
+      } else {
+        window.confirm(`That Email and/or password is incorrect. Please try again.`)
+      }
 
-      this.props.history.push("/register")
+      // this.props.history.push("/register")
     })
   }
 
