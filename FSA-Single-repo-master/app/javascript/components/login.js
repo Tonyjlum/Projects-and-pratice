@@ -34,6 +34,7 @@ class Login extends Component {
     .then( user => {
       console.log(user)
       if (user.id > 0){
+        this.props.setUser(user)
         this.props.history.push("/portfolio")
       } else {
         window.confirm(`That Email and/or password is incorrect. Please try again.`)

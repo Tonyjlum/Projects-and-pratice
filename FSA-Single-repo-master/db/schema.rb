@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_012912) do
+ActiveRecord::Schema.define(version: 2019_10_02_010247) do
+
+  create_table "stocks", force: :cascade do |t|
+    t.string "ticker_symbol"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "transactions", force: :cascade do |t|
-    t.string "ticker_symbol"
+    t.integer "user_id"
+    t.integer "stock_id"
     t.float "stock_price"
     t.integer "shares"
-    t.integer "user_id"
+    t.string "transactions_type", default: "BUY"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

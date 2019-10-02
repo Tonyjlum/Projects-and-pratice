@@ -10,7 +10,11 @@ class V1::UsersController < ApplicationController
   def login
     @user = User.find_by(email: user_params["email"], password: user_params["password"] )
     if @user
-      render json: @user
+      render json: @user.to_json(only: [:id],
+        include:[transactions: {only:[:id, :stock_id, :stock_price, :shares, :transactions_type]
+          }]
+
+        )
     else
       render json: {id:0, errors: "Incorrect email or password. Please try again."}
     end

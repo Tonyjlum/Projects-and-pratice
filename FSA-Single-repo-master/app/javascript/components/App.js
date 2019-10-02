@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import '../app.css';
+// import { Provider } from "react-redux"
 
 import {BrowserRouter, Switch, Route} from "react-router-dom"
 
@@ -17,12 +18,21 @@ class App extends React.Component {
     transactions: []
   }
 
+  setUser = (login) =>{
+    console.log(login)
+    this.setState({
+      id: login.id,
+      transactions: login.transactions
+    }, () => {console.log(this.state, "after login")})
+
+  }
+
 
   render () {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={() => <Login />}/>
+          <Route exact path="/" render={() => <Login setUser={this.setUser}/>}/>
           <Route exact path="/register" render={() => <Register />}/>
           // <Route path="/hello" render={() => <HelloWorld greeting="Friend"/>} />
           <Route exact path="/portfolio" render ={() => <Portfolio />}/>
