@@ -13,6 +13,10 @@ class Login extends Component {
     })
   }
 
+  handleNewAccount = () => {
+    this.props.history.push("/register")
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     fetch("http://localhost:3000/v1/login",{
@@ -29,6 +33,8 @@ class Login extends Component {
     .then( response => response.json())
     .then( user => {
       console.log(user)
+      //push in to stock page
+
       this.props.history.push("/register")
     })
   }
@@ -61,6 +67,10 @@ class Login extends Component {
             type="submit"
             value="Login"/>
         </form>
+        <button
+          id="register-button"
+          onClick={this.handleNewAccount}
+        >Register</button>
       </div>
     );
   }

@@ -14,6 +14,10 @@ class Register extends Component {
     })
   }
 
+  handleLogin = () => {
+    this.props.history.push("/")
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     // console.log(this.state)
@@ -75,6 +79,10 @@ class Register extends Component {
             type="submit"
             value="Create New Account"/>
         </form>
+        <button
+          id="register-button"
+          onClick={this.handleLogin}
+        >Login</button>
       </div>
     );
   }

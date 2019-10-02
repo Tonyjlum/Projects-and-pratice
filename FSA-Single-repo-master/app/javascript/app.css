@@ -16,6 +16,10 @@ code {
   text-align: center;
 }
 
+Body {
+    background-image: url("./img/dot-grid.png");
+}
+
 .App-logo {
   height: 40vmin;
 }
@@ -46,21 +50,24 @@ code {
 .login-form{
   border: 3px solid darkgrey;
   border-radius: 10px;
-  padding: 0% 10% 5% 10%
+  padding: 0% 10% 5% 10%;
+  background-color: white
 }
 
 .form-input {
-  margin-bottom: 10%;
+  margin-bottom: 15%;
   padding: 5%;
   font-size:10pt;
-  width: 18vw;
+  width: 100%;
   border-radius: 10px;
   height: 1em;
+  font-size: 15px;
 }
 .button {
-  width: 100%;
+  width: 110%;
   background-color: skyblue;
   border-radius: 10px;
+  font-size: 16px;
 }
 
 .center-text{
@@ -68,4 +75,12 @@ code {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#register-button{
+  background-color: lightgreen;
+  border-radius: 10px;
+  margin-top: 2%;
+  width: 30%;
+    font-size: 16px;
 }
