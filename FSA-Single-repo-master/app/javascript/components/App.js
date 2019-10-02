@@ -5,7 +5,6 @@ import '../app.css';
 
 import {BrowserRouter, Switch, Route} from "react-router-dom"
 
-import HelloWorld from './HelloWorld.js'
 import Login from './login.js'
 import Register from './register'
 import Portfolio from './portfolio'
@@ -20,22 +19,25 @@ class App extends React.Component {
   }
 
   setUser = (login) =>{
+    // console.log(login, "from app")
     this.setState({
       id: login.user.id,
       balance: login.user.balance,
       user: login.user.name,
-      transactions: login.user.transactions
+      transactions: login.user.transactions,
+      stocks: login.user.stocks
     })
 
   }
-
 
   render () {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={() => <Login setUser={this.setUser}/>}/>
+          <Route exact path="/" render={() => <Login setUser={this.setUser}/>} />
+
           <Route exact path="/register" render={() => <Register />}/>
+
           <Route exact path="/portfolio" render ={() => <Portfolio user={this.state}/>}/>
         </Switch>
       </BrowserRouter>

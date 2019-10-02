@@ -1,26 +1,51 @@
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom'
 
-class Portfolio extends PureComponent {
-  // state = {
-  //   balance: 0,
-  //   stocks: [],
-  //   user_id: 0,
-  // }
+import Navbar from './navbar'
+import PortfolioStockDisplay from './portfoliostockdisplay'
 
-  //make Component for portfolio stock list
-  //make Component for but new stock
+class Portfolio extends PureComponent {
+  state = {
+    stocks: {},
+  }
+
+
+  renderStocks = () => {
+    console.log(this.props.user, "render")
+
+    return this.props.user.stocks.map( stock => {
+      //fetch each price here, add to state
+      //render worth in this componenet
+      return <PortfolioStockDisplay stock={stock}/>
+    })
+  }
+  //
+  // combineStock = () => {
+  //   const stocks = {}
+  //   this.props.user.transactions.forEach( stock => {
+  //     if (stocks[`${stock.ticker_symbol}`] == undefined){
+  //       stocks[`${stock.ticker_symbol}`] = stock.shares
+  //     } else {
+  //       stocks[`${stock.ticker_symbol}`] += stock.shares
+  //     }
+  //   })
+  //   return stocks
+  // }
 
 
   render() {
-    console.log(this.props.user, "from prot")
+
     if (this.props.user.id === 0){
       this.props.history.push("/")
     }
     return (
       <div>
-        {this.props.user.balance}
-        Hi
+        <div className="standard-size">
+          <div id="balance">
+            {this.props.user.balance}
+            {this.renderStocks()}
+          </div>
+        </div>
       </div>
     );
   }

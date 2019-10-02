@@ -84,3 +84,27 @@ Body {
   width: 30%;
     font-size: 16px;
 }
+
+#balance {
+  font-size: 30px;
+  margin: 5% 10% 5%;
+}
+
+.standard-size{
+  display: flex;
+  margin-top: 5vh;
+  margin-left: 10vw;
+  height: 90vh;
+  width: 80vw;
+
+  border: 3px solid darkgrey;
+}
+.float-left {
+  float: left;
+}
+
+#navbar {
+  display: flex;
+  float: right;
+  align-self: ;
+}
