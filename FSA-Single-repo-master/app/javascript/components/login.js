@@ -32,6 +32,7 @@ class Login extends Component {
     })
     .then( response => response.json())
     .then( user => {
+      // console.log(user,"atfetch")
       if (user.user.id > 0){
         this.props.setUser(user)
         this.props.history.push("/portfolio")

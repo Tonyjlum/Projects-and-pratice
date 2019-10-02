@@ -26,7 +26,7 @@ class V1::UsersController < ApplicationController
     params["email"] = email_downcase(params["email"])
     @user = User.create(user_params)
     if @user.id
-      render json: @user.id
+      render json: {id: @user.id}
     else
       render json: {id:0, errors: "Email address already in use. Please login or make use a different email."}
     end

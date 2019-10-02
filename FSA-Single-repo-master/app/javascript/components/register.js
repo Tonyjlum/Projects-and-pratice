@@ -34,6 +34,13 @@ class Register extends Component {
       })
     })
     .then( response => response.json())
+    .then( account => {
+      if (account.id > 0){
+        this.props.history.push("/")
+      } else {
+        window.confirm(`That Email address is already in use. Please login with ${this.state.email} or try a different email.`)
+      }
+    })
 
   }
 
