@@ -14,7 +14,6 @@ class Portfolio extends PureComponent {
   componentDidMount(){
   if (this.props.user.stocks){
     this.props.user.stocks.map( stock => {
-      // fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock.ticker_symbol}&apikey=IJUTTBOO2Z9LGHGU`)
       fetch(`https://cloud.iexapis.com/stable/stock/${stock.ticker_symbol}/quote?token=sk_69abc46b0d5346b2999a5d51f1377ea7`)
       .then( response => response.json())
       .then( stockinfo => {
@@ -37,9 +36,7 @@ class Portfolio extends PureComponent {
   }
 
   render() {
-    if (this.props.user.id === 0){
-      this.props.history.push("/")
-    }
+    if (this.props.user.id === 0) { this.props.history.push("/") }
     return (
       <div>
         <div className="standard-size">

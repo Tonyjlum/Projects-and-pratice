@@ -20,7 +20,6 @@ class Register extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    // console.log(this.state)
     fetch("http://localhost:3000/v1/register",{
       method: "POST",
       headers: {

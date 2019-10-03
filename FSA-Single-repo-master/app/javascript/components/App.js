@@ -8,6 +8,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom"
 import Login from './login.js'
 import Register from './register'
 import Portfolio from './portfolio'
+import Transactions from './transactions'
 
 
 class App extends React.Component {
@@ -63,6 +64,7 @@ class App extends React.Component {
           <Route exact path="/register" render={() => <Register />}/>
 
           <Route exact path="/portfolio" render ={() => <Portfolio user={this.state} updateTransaction = {this.updateTransaction}/>}/>
+          <Route eact path="/transactions" render={() => <Transactions/>}/>
         </Switch>
       </BrowserRouter>
     );

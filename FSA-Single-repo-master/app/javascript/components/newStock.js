@@ -18,7 +18,6 @@ class NewStock extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    // fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.state.ticker_symbol}&apikey=IJD6M0Q6TAAQESFS`)
     fetch(`https://cloud.iexapis.com/stable/stock/${this.state.ticker_symbol}/quote?token=sk_69abc46b0d5346b2999a5d51f1377ea7`)
     .then( response => {
       if (!response.ok) { throw response }
@@ -62,49 +61,12 @@ class NewStock extends Component {
         window.alert(`${this.state.ticker_symbol} is an invalid ticker symbol. Please try again.`)
 
     })
-    // .then(stockinfo => {
-    //   const stock_price = stockinfo.latestPrice
-    //   const total_cost = stock_price * this.state.quantity
-    //
-    //   if (stock_price == "undefined"){
-    //     window.confirm("Invalid Stock, Please try a different Ticker Symbol.")
-    //     console.log("wrong stock name")
-    //   } else if (total_cost > this.state.balance){
-    //     window.confirm(`You do not have enought to purchase ${this.state.quantity} shares of ${this.state.ticker_symbol}. Please lower your quantity.`)
-    //   } else {
-    //     fetch("http://localhost:3000/v1/transactions", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         "Accept": "application/json"
-    //       },
-    //       body: JSON.stringify({
-    //         user_id: this.state.user_id,
-    //         stock_price: stock_price,
-    //         shares: Math.floor(this.state.quantity),
-    //         ticker_symbol: this.state.ticker_symbol.toUpperCase()
-    //       })
-    //     })
-    //     .then( resp => resp.json())
-    //     .then( tra => {
-    //       this.props.updateTransaction({ticker_symbol: tra.transaction.ticker_symbol, shares: tra.transaction.shares }, total_cost)
-    //     })
-    //     .then( xyz => {
-    //       this.setState({
-    //         ticker_symbol: "",
-    //         quantity: 0,
-    //         price: 0,
-    //         balance: this.state.balance - total_cost
-    //       })
-    //     })
-    //   }
-    // })
   }
 
   render() {
     return (
       <div>
-        {`Cash - $${this.state.balance.toFixed(2)}`}
+        {`Cash - $${this.state.balance && this.state.balance.toFixed(2)}`}
         <form
           className= "login-form"
           onChange={this.handleChange}
