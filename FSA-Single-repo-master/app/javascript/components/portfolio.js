@@ -3,35 +3,33 @@ import { withRouter } from 'react-router-dom'
 
 import Navbar from './navbar'
 import PortfolioStockDisplay from './portfoliostockdisplay'
+import NewStock from './newStock'
 
 class Portfolio extends PureComponent {
   state = {
     stocks: {},
+    total_price: 0
   }
 
-
-  renderStocks = () => {
-    console.log(this.props.user, "render")
-
-    return this.props.user.stocks.map( stock => {
-      //fetch each price here, add to state
-      //render worth in this componenet
-      return <PortfolioStockDisplay stock={stock}/>
+  componentDidMount(){
+    this.props.user.stocks.map( stock => {
+      fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock.ticker_symbol}&apikey=IJUTTBOO2Z9LGHGU`)
+      .then( response => response.json())
+      .then( stockinfo => {
+        // console.log(stockinfo["Global Quote"]["05. price"] * stock.total_shares)
+        this.setState({
+          total_price: this.state.total_price + (stockinfo["Global Quote"]["05. price"] * stock.total_shares)
+        })
+      })
     })
   }
-  //
-  // combineStock = () => {
-  //   const stocks = {}
-  //   this.props.user.transactions.forEach( stock => {
-  //     if (stocks[`${stock.ticker_symbol}`] == undefined){
-  //       stocks[`${stock.ticker_symbol}`] = stock.shares
-  //     } else {
-  //       stocks[`${stock.ticker_symbol}`] += stock.shares
-  //     }
-  //   })
-  //   return stocks
-  // }
 
+
+  renderStock = () => {
+    return this.props.user.stocks.map( stock => {
+      return <PortfolioStockDisplay key={stock.ticker_symbol} stock={stock} />
+    })
+  }
 
   render() {
 
@@ -41,9 +39,16 @@ class Portfolio extends PureComponent {
     return (
       <div>
         <div className="standard-size">
-          <div id="balance">
-            {this.props.user.balance}
-            {this.renderStocks()}
+          <div id="balance" className="display-flex">
+            <div className="float-left">
+              Portfolio: ${this.state.total_price.toFixed(2)}
+              <br/>
+              <br/>
+              {this.renderStock()}
+            </div >
+            <div className="float-right">
+              <NewStock balance={this.props.user.balance}/>
+            </div>
           </div>
         </div>
       </div>

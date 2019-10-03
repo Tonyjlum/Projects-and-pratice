@@ -99,12 +99,38 @@ Body {
 
   border: 3px solid darkgrey;
 }
+
+.display-flex{
+  display: flex;
+}
 .float-left {
   float: left;
 }
+
+.float_right{
+  float: right;
+}
+
 
 #navbar {
   display: flex;
   float: right;
   align-self: ;
+}
+
+.stock-display{
+  border-bottom: 3px solid darkgrey;
+  padding: .2em;
+  font-size: 20px;
+}
+
+.red-text{
+  color: red
+}
+.green-text{
+  color: green
+}
+
+.grey-text{
+
 }
