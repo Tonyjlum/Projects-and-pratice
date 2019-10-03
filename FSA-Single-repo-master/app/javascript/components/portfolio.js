@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom'
+import NavBar from './navbar'
 
 import Navbar from './navbar'
 import PortfolioStockDisplay from './portfoliostockdisplay'
@@ -40,6 +41,8 @@ class Portfolio extends PureComponent {
     return (
       <div>
         <div className="standard-size">
+        <NavBar/>
+
           <div id="balance" className="display-flex">
             <div className="float-left">
               Portfolio: ${this.state.total_price.toFixed(2)}

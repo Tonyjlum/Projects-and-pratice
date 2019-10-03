@@ -1,5 +1,9 @@
 import React, { PureComponent } from 'react';
+import { withRouter } from 'react-router-dom'
 import Transaction from './transaction'
+import NavBar from './navbar'
+
+
 class TransactionContainer extends PureComponent {
 
   renderTransactions= () => {
@@ -9,10 +13,13 @@ class TransactionContainer extends PureComponent {
   }
 
   render() {
+    if (this.props.user.id === 0) { this.props.history.push("/") }
     console.log(this.props.user)
     return (
       <div className="standard-size">
+      <NavBar/>
         <h1>Transaction</h1>
+
         <div className="overflow">
           {this.renderTransactions()}
         </div>
@@ -22,4 +29,4 @@ class TransactionContainer extends PureComponent {
 
 }
 
-export default TransactionContainer;
+export default withRouter(TransactionContainer);
