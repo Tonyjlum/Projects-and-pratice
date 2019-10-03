@@ -12,17 +12,21 @@ class Portfolio extends PureComponent {
   }
 
   componentDidMount(){
+  if (this.props.user.stocks){
     this.props.user.stocks.map( stock => {
-      fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock.ticker_symbol}&apikey=IJUTTBOO2Z9LGHGU`)
+      // fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock.ticker_symbol}&apikey=IJUTTBOO2Z9LGHGU`)
+      fetch(`https://cloud.iexapis.com/stable/stock/${stock.ticker_symbol}/quote?token=sk_69abc46b0d5346b2999a5d51f1377ea7`)
       .then( response => response.json())
       .then( stockinfo => {
-        console.log(stockinfo["Global Quote"]["05. price"] * stock.total_shares)
         this.setState({
-          total_price: this.state.total_price + (stockinfo["Global Quote"]["05. price"] * stock.total_shares)
+          total_price: this.state.total_price + (stockinfo.latestPrice * stock.total_shares)
         }, () => console.log(this.state, "the state"))
-
       })
     })
+  }
+  }
+  updateNewStock = (price) => {
+    this.setState({total_price: this.state.total_price + price})
   }
 
 
@@ -33,7 +37,6 @@ class Portfolio extends PureComponent {
   }
 
   render() {
-
     if (this.props.user.id === 0){
       this.props.history.push("/")
     }
@@ -45,11 +48,12 @@ class Portfolio extends PureComponent {
               Portfolio: ${this.state.total_price.toFixed(2)}
               <br/>
               <br/>
-              {this.renderStock()}
+              {this.props.user.stocks && this.renderStock()}
             </div >
             <div className="float-right">
               <NewStock balance={this.props.user.balance} user_id={this.props.user.id}
               updateTransaction={this.props.updateTransaction}
+              updateNewStock={this.updateNewStock}
               />
             </div>
           </div>

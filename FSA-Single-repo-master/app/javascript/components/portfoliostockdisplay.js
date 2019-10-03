@@ -10,23 +10,23 @@ class PortfolioStockDisplay extends Component {
 
 
   componentDidMount(){
-    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.props.stock.ticker_symbol}&apikey=SI6AQKBYGQE1HV4V`)
+    // fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.props.stock.ticker_symbol}&apikey=SI6AQKBYGQE1HV4V`)
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.props.stock.ticker_symbol}/quote?token=sk_69abc46b0d5346b2999a5d51f1377ea7`)
     .then( res => res.json())
     .then( stockinfo => {
-      if (stockinfo["Note"]){
-        window.confirm(`Alphavantage API overload, please try again later for updates. Updates for ${this.props.stock.ticker_symbol} could not be loaded.`)
-      }
-      // console.log(stockinfo,"fetch")
+      // if (stockinfo["Note"]){
+      //   window.confirm(`Alphavantage API overload, please try again later for updates. Updates for ${this.props.stock.ticker_symbol} could not be loaded.`)
+      // }
+      console.log(stockinfo,"fetch")
       this.setState({
         stockinfo: stockinfo,
-        price: parseFloat(stockinfo["Global Quote"]["05. price"]).toFixed(2),
-        open: parseFloat(stockinfo["Global Quote"]["02. open"]).toFixed(2)
+        price: stockinfo.latestPrice,
+        open: stockinfo.previousClose
       })
     })
   }
 
   render() {
-    // console.log(this.state, "stock")
     return (
       <div className={`stock-display display-flex ${this.state.price > this.state.open && "green-text"} ${this.state.price < this.state.open && "red-text"}`}>
         {this.state.price > this.state.open && "📈"}
