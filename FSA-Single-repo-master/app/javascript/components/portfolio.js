@@ -16,10 +16,11 @@ class Portfolio extends PureComponent {
       fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock.ticker_symbol}&apikey=IJUTTBOO2Z9LGHGU`)
       .then( response => response.json())
       .then( stockinfo => {
-        // console.log(stockinfo["Global Quote"]["05. price"] * stock.total_shares)
+        console.log(stockinfo["Global Quote"]["05. price"] * stock.total_shares)
         this.setState({
           total_price: this.state.total_price + (stockinfo["Global Quote"]["05. price"] * stock.total_shares)
-        })
+        }, () => console.log(this.state, "the state"))
+
       })
     })
   }
@@ -47,7 +48,9 @@ class Portfolio extends PureComponent {
               {this.renderStock()}
             </div >
             <div className="float-right">
-              <NewStock balance={this.props.user.balance} user_id={this.props.user.id}/>
+              <NewStock balance={this.props.user.balance} user_id={this.props.user.id}
+              updateTransaction={this.props.updateTransaction}
+              />
             </div>
           </div>
         </div>

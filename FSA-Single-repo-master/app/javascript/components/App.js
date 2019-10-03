@@ -19,7 +19,6 @@ class App extends React.Component {
   }
 
   setUser = (login) =>{
-    // console.log(login, "from app")
     this.setState({
       id: login.user.id,
       balance: login.user.balance,
@@ -27,10 +26,38 @@ class App extends React.Component {
       transactions: login.user.transactions,
       stocks: login.user.stocks
     })
+  }
+
+  updateTransaction = (transaction) => {
+    console.log(transaction, "from update trans")
+    if (this.state.stocks.map( s => s.ticker_symbol).includes(transaction.ticker_symbol)){
+      const updatedStock= this.state.stocks.map( stock => {
+        if (stock.ticker_symbol == transaction.ticker_symbol){
+          return {ticker_symbol: stock.ticker_symbol, total_shares: stock.total_shares + transaction.shares}
+        } else {
+          return stock
+        }
+      })
+      this.setState({
+        stocks: updatedStock
+      })
+
+    } else {
+      this.setState({
+        stocks: [...this.state.stocks, {ticker_symbol: "TEST", total_shares: 1}]
+      })
+    }
+
+    // this.setState({
+    //   stocks: [...this.state.stocks, {ticker_symbol: "TEST", total_shares: 1}]
+    // })
 
   }
 
+
+
   render () {
+    console.log(this.state);
     return (
       <BrowserRouter>
         <Switch>
@@ -38,7 +65,7 @@ class App extends React.Component {
 
           <Route exact path="/register" render={() => <Register />}/>
 
-          <Route exact path="/portfolio" render ={() => <Portfolio user={this.state}/>}/>
+          <Route exact path="/portfolio" render ={() => <Portfolio user={this.state} updateTransaction = {this.updateTransaction}/>}/>
         </Switch>
       </BrowserRouter>
     );

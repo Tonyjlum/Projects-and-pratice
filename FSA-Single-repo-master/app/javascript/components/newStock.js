@@ -18,14 +18,14 @@ class NewStock extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log("from buy")
+    // console.log("from buy")
     // this.setState({
     //   ticker_symbol: "",
     //   quantity: 0,
     //   price: 0,
     //   balance: this.props.balance
     // })
-    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.state.ticker_symbol}&apikey=IJUTTBOO2Z9LGHGU`)
+    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.state.ticker_symbol}&apikey=IJD6M0Q6TAAQESFS`)
     .then( response => response.json())
     .then(stockinfo => {
 
@@ -52,6 +52,11 @@ class NewStock extends Component {
             ticker_symbol: this.state.ticker_symbol.toUpperCase()
           })
         })
+        .then( resp => resp.json())
+        .then( tra => {
+          this.props.updateTransaction({ticker_symbol: tra.transaction.ticker_symbol, shares: tra.transaction.shares })
+        })
+
       }
 
 
@@ -63,7 +68,7 @@ class NewStock extends Component {
   render() {
     return (
       <div>
-        {`Cash - ${this.state.balance}`}
+        {`Cash - $${this.state.balance}`}
         <form
           className= "login-form"
           onChange={this.handleChange}

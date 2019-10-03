@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 class HelloWorld extends React.Component {
   render () {
-    console.log("its working")
+    // console.log("its working")
     return (
       <React.Fragment>
         Greeting: {this.props.greeting}

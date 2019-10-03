@@ -29,6 +29,7 @@ class V1::TransactionsController < ApplicationController
       @user = User.find(params["user_id"])
       @user.update(balance: @user.balance - transaction_cost)
     end
+    render json: @transaction
   end
 
   private

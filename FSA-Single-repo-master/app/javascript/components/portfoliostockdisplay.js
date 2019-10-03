@@ -10,7 +10,7 @@ class PortfolioStockDisplay extends Component {
 
 
   componentDidMount(){
-    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.props.stock.ticker_symbol}&apikey=IJUTTBOO2Z9LGHGU`)
+    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.props.stock.ticker_symbol}&apikey=SI6AQKBYGQE1HV4V`)
     .then( res => res.json())
     .then( stockinfo => {
       if (stockinfo["Note"]){
@@ -26,7 +26,7 @@ class PortfolioStockDisplay extends Component {
   }
 
   render() {
-    console.log(this.state, "stock")
+    // console.log(this.state, "stock")
     return (
       <div className={`stock-display display-flex ${this.state.price > this.state.open && "green-text"} ${this.state.price < this.state.open && "red-text"}`}>
         {this.state.price > this.state.open && "📈"}
