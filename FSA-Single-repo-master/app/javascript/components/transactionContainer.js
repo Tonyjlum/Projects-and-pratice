@@ -5,12 +5,25 @@ import NavBar from './navbar'
 
 
 class TransactionContainer extends PureComponent {
+  state = {
+    transactions: []
+  }
+
 
   renderTransactions= () => {
-    return this.props.user.transactions.map( transaction => {
+    return this.state.transactions.map( transaction => {
       return <Transaction key={transaction.id} transaction={transaction}/>
     })
   }
+  componentDidMount(){
+    fetch(`http://localhost:3000/v1/users/${this.props.user.id}`)
+    .then(resp => resp.json())
+    .then( resp => {
+      // console.log(resp.user.transactions, "at t")
+      this.setState({transactions: resp.user.transactions})
+    })
+  }
+
 
   render() {
     if (this.props.user.id === 0) { this.props.history.push("/") }

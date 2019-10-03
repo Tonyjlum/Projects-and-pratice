@@ -45,7 +45,7 @@ class NewStock extends Component {
         })
         .then( resp => resp.json())
         .then( tra => {
-          this.props.updateTransaction({ticker_symbol: tra.transaction.ticker_symbol, shares: tra.transaction.shares }, total_cost)
+          this.props.updateTransaction({ticker_symbol: tra.transaction.ticker_symbol, shares: tra.transaction.shares }, total_cost, tra)
         })
         .then( xyz => {
           this.setState({
@@ -65,10 +65,13 @@ class NewStock extends Component {
 
   render() {
     return (
-      <div>
+      <div className="new-stock-form">
         {`Cash - $${this.state.balance && this.state.balance.toFixed(2)}`}
+        <br/>
+        <br/>
+        <div>
         <form
-          className= "login-form"
+          className= ""
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}>
           <input
@@ -92,6 +95,7 @@ class NewStock extends Component {
               type="submit"
               value="Buy"/>
         </form>
+        </div>
       </div>
     );
   }

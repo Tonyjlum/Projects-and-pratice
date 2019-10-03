@@ -10,10 +10,9 @@ class Navbar extends Component {
   render() {
     return (
       <div id="navbar">
-        <button onClick={this.handleClick} id="portfolio">Protfolio</button>
-        <button onClick={this.handleClick} id="transactions">Transactions</button>
-        <button onClick={this.handleClick} id="">Logout</button>
-
+        <button className="button right-buffer" onClick={this.handleClick} id="portfolio">Protfolio</button>
+        <button className="button right-buffer" onClick={this.handleClick} id="transactions">Transactions</button>
+        <button className="button right-buffer" onClick={this.handleClick} id="">Logout</button>
       </div>
     );
   }

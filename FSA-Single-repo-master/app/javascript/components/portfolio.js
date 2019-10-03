@@ -39,18 +39,17 @@ class Portfolio extends PureComponent {
   render() {
     if (this.props.user.id === 0) { this.props.history.push("/") }
     return (
-      <div>
-        <div className="standard-size">
-        <NavBar/>
-
-          <div id="balance" className="display-flex">
-            <div className="float-left">
+      <div className="standard-size">
+      <NavBar/>
+        <div className="">
+          <div id="balance" className="display-flex left_side">
+            <div className="left_side ">
               Portfolio: ${this.state.total_price.toFixed(2)}
-              <br/>
-              <br/>
+              <div className ="overflow" id="stock-display">
               {this.props.user.stocks && this.renderStock()}
+              </div>
             </div >
-            <div className="float-right">
+            <div className="float-right right-side">
               <NewStock balance={this.props.user.balance} user_id={this.props.user.id}
               updateTransaction={this.props.updateTransaction}
               updateNewStock={this.updateNewStock}

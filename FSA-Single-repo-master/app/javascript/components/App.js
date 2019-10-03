@@ -29,8 +29,10 @@ class App extends React.Component {
     })
   }
 
-  updateTransaction = (transaction, budget) => {
-    console.log(budget, "from update trans")
+
+
+  updateTransaction = (transaction, budget, total_trans) => {
+    console.log(total_trans, "at update", this.state.transactions);
     if (this.state.stocks.map( s => s.ticker_symbol).includes(transaction.ticker_symbol)){
       const updatedStock= this.state.stocks.map( stock => {
         if (stock.ticker_symbol == transaction.ticker_symbol){
@@ -47,8 +49,10 @@ class App extends React.Component {
         stocks: [...this.state.stocks, {ticker_symbol: transaction.ticker_symbol, total_shares: transaction.shares}]
       })
     }
+
     this.setState({
-      budget: this.state.balance - budget.toFixed(2)
+      budget: this.state.balance - budget.toFixed(2),
+      // transactions: [...this.state.transactions, total_trans]
     })
   }
 
