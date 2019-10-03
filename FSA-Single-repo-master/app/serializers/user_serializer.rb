@@ -3,6 +3,7 @@ class UserSerializer < ActiveModel::Serializer
   def transactions
     object.transactions.map { |transaction|
       {
+        id: transaction.id,
         ticker_symbol: transaction.stock.ticker_symbol,
         stock_price: transaction.stock_price,
         shares: transaction.shares,

@@ -91,13 +91,12 @@ Body {
 }
 
 .standard-size{
-  display: flex;
+  /* display: flex; */
   margin-top: 5vh;
   margin-left: 10vw;
   height: 90vh;
   width: 80vw;
-
-  border: 3px solid darkgrey;
+  /* border: 3px solid darkgrey; */
 }
 
 .display-flex{
@@ -123,6 +122,10 @@ Body {
   padding: .2em;
   font-size: 20px;
 }
+.stock_spacing{
+  margin-bottom: 10px;
+  width: 60vh;
+}
 
 .red-text{
   color: red
@@ -131,6 +134,7 @@ Body {
   color: green
 }
 
-.grey-text{
-
+.overflow{
+  overflow-y: scroll;
+  height: 85vh;
 }

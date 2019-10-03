@@ -35,7 +35,7 @@ class Login extends Component {
       // console.log(user,"atfetch")
       if (user.user.id > 0){
         this.props.setUser(user)
-        this.props.history.push("/portfolio")
+        this.props.history.push("/transactions")
       } else {
         window.confirm(`That Email and/or password is incorrect. Please try again.`)
       }
