@@ -47,7 +47,7 @@ class Portfolio extends PureComponent {
               {this.renderStock()}
             </div >
             <div className="float-right">
-              <NewStock balance={this.props.user.balance}/>
+              <NewStock balance={this.props.user.balance} user_id={this.props.user.id}/>
             </div>
           </div>
         </div>

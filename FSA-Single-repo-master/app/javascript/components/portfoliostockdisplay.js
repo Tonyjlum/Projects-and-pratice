@@ -28,7 +28,7 @@ class PortfolioStockDisplay extends Component {
   render() {
     console.log(this.state, "stock")
     return (
-      <div className={`stock-display display-flex ${this.state.price > this.state.open ? "green-text" : "red-text"}`}>
+      <div className={`stock-display display-flex ${this.state.price > this.state.open && "green-text"} ${this.state.price < this.state.open && "red-text"}`}>
         {this.state.price > this.state.open && "📈"}
         {this.state.price == this.state.open && "⬜"}
         {this.state.price < this.state.open && "📉"}

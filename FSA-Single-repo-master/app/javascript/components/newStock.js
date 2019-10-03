@@ -6,7 +6,8 @@ class NewStock extends Component {
     ticker_symbol: "",
     quantity: 0,
     price: 0,
-    balance: this.props.balance
+    balance: this.props.balance,
+    user_id: this.props.user_id
   }
 
   handleChange = (e) => {
@@ -27,13 +28,30 @@ class NewStock extends Component {
     fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.state.ticker_symbol}&apikey=IJUTTBOO2Z9LGHGU`)
     .then( response => response.json())
     .then(stockinfo => {
-      const total_cost = stockinfo["Global Quote"]["05. price"] * this.state.quantity
-      console.log(stockinfo, "stockinfo")
-      console.log(total_cost, "total_cost");
+
+      //***return error if stock not found***
+
+
+      console.log(stockinfo);
+      const stock_price = stockinfo["Global Quote"]["05. price"]
+      const total_cost = stock_price * this.state.quantity
+
       if (total_cost > this.state.balance){
         window.confirm(`You do not have enought to purchase ${this.state.quantity} shares of ${this.state.ticker_symbol}. Please lower your quantity.`)
       } else {
-        window.confirm("you got it boss")
+        fetch("http://localhost:3000/v1/transactions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            user_id: this.state.user_id,
+            stock_price: stock_price,
+            shares: this.state.quantity,
+            ticker_symbol: this.state.ticker_symbol.toUpperCase()
+          })
+        })
       }
 
 
