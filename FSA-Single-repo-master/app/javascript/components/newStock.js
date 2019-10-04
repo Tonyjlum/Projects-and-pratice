@@ -39,6 +39,7 @@ class NewStock extends Component {
           body: JSON.stringify({
             user_id: this.state.user_id,
             stock_price: stock_price,
+            // transactions_type: "BUY",
             shares: Math.floor(this.state.quantity),
             ticker_symbol: this.state.ticker_symbol.toUpperCase()
           })
@@ -46,6 +47,7 @@ class NewStock extends Component {
         .then( resp => resp.json())
         .then( tra => {
           this.props.updateTransaction({ticker_symbol: tra.transaction.ticker_symbol, shares: tra.transaction.shares }, total_cost, tra)
+          this.props.updateBudget(total_cost)
         })
         .then( xyz => {
           this.setState({

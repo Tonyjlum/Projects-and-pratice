@@ -53,6 +53,7 @@ class Portfolio extends PureComponent {
               <NewStock balance={this.props.user.balance} user_id={this.props.user.id}
               updateTransaction={this.props.updateTransaction}
               updateNewStock={this.updateNewStock}
+              updateBudget={this.props.updateBudget}
               />
             </div>
           </div>

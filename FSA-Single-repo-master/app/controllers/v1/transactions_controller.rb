@@ -16,7 +16,6 @@ class V1::TransactionsController < ApplicationController
     if @stock == nil
       @stock = Stock.create(ticker_symbol: params["ticker_symbol"])
     end
-
     @transaction = Transaction.create(
       user_id: params["user_id"],
       stock_id: @stock.id,

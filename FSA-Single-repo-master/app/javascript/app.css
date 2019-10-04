@@ -102,6 +102,7 @@ Body {
 .display-flex{
   display: flex;
 }
+
 .float-left {
   float: left;
 }
@@ -135,6 +136,7 @@ Body {
 .overflow{
   overflow-y: scroll;
   max-height: 70vh;
+  overflow-x: hidden;
 }
 .right-buffer {
   margin-right: 5%;

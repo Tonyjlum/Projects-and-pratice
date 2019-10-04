@@ -2,6 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import '../app.css';
 // import { Provider } from "react-redux"
+//Many problems could have been resolved with React.
+
 
 import {BrowserRouter, Switch, Route} from "react-router-dom"
 
@@ -10,7 +12,6 @@ import Register from './register'
 import Portfolio from './portfolio'
 import TransactionContainer from './transactionContainer'
 
-
 class App extends React.Component {
   state = {
     id: 0,
@@ -18,7 +19,7 @@ class App extends React.Component {
     budget: 0,
     transactions: []
   }
-
+  //Save user info to pass down to components
   setUser = (login) =>{
     this.setState({
       id: login.user.id,
@@ -28,11 +29,10 @@ class App extends React.Component {
       stocks: login.user.stocks
     })
   }
-
-
-
+  //update transaction on portfoilio page
   updateTransaction = (transaction, budget, total_trans) => {
-    console.log(total_trans, "at update", this.state.transactions);
+    //check if the ticker_symbol already exist and add to it if it does.
+    //if it does not, it will append to the end of the array.
     if (this.state.stocks.map( s => s.ticker_symbol).includes(transaction.ticker_symbol)){
       const updatedStock= this.state.stocks.map( stock => {
         if (stock.ticker_symbol == transaction.ticker_symbol){
@@ -49,10 +49,14 @@ class App extends React.Component {
         stocks: [...this.state.stocks, {ticker_symbol: transaction.ticker_symbol, total_shares: transaction.shares}]
       })
     }
-
     this.setState({
       budget: this.state.balance - budget.toFixed(2),
-      // transactions: [...this.state.transactions, total_trans]
+    })
+  }
+  //update budget when purchasing a stock.
+  updateBudget = (amount) => {
+    this.setState({
+      balance: this.state.balance - amount.toFixed(2)
     })
   }
 
@@ -63,10 +67,8 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={() => <Login setUser={this.setUser}/>} />
-
           <Route exact path="/register" render={() => <Register />}/>
-
-          <Route exact path="/portfolio" render ={() => <Portfolio user={this.state} updateTransaction = {this.updateTransaction}/>}/>
+          <Route exact path="/portfolio" render ={() => <Portfolio user={this.state} updateBudget = {this.updateBudget} updateTransaction = {this.updateTransaction}/>}/>
           <Route eact path="/transactions" render={() => <TransactionContainer user={this.state}/>}/>
         </Switch>
       </BrowserRouter>
