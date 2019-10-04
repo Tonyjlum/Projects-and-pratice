@@ -4,7 +4,6 @@ class Transaction extends Component {
 
   render() {
     const t = this.props.transaction
-    console.log(this.props.transaction);
     return (
       <div>
         <div className="stock-display stock_spacing">

@@ -19,7 +19,6 @@ class TransactionContainer extends PureComponent {
     fetch(`http://localhost:3000/v1/users/${this.props.user.id}`)
     .then(resp => resp.json())
     .then( resp => {
-      // console.log(resp.user.transactions, "at t")
       this.setState({transactions: resp.user.transactions})
     })
   }
@@ -27,7 +26,6 @@ class TransactionContainer extends PureComponent {
 
   render() {
     if (this.props.user.id === 0) { this.props.history.push("/") }
-    console.log(this.props.user)
     return (
       <div className="standard-size">
       <NavBar/>

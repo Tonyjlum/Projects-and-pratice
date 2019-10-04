@@ -20,7 +20,7 @@ class Portfolio extends PureComponent {
       .then( stockinfo => {
         this.setState({
           total_price: this.state.total_price + (stockinfo.latestPrice * stock.total_shares)
-        }, () => console.log(this.state, "the state"))
+        })
       })
     })
   }

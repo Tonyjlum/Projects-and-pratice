@@ -25,13 +25,11 @@ class NewStock extends Component {
       return response.json()
     })
     .then( stock => {
-      console.log(stock)
       this.setState({
         searched_stock: stock
       })
     })
     .catch(err => {
-      console.log("error")
       this.setState({
         searched_stock:  null
       })
@@ -41,15 +39,23 @@ class NewStock extends Component {
   renderStockCompany = () => {
     return(
       <div className="stock-text">
-        {this.state.searched_stock && `${this.state.searched_stock.companyName}(${this.state.searched_stock.symbol})`}
+        {this.state.searched_stock.companyName && `${this.state.searched_stock.companyName}(${this.state.searched_stock.symbol})`}
       </div>
     )
   }
 
   renderStockPrice = () => {
     return(
+      <div className="stock-text ">
+        {this.state.searched_stock.latestPrice && `$${this.state.searched_stock.latestPrice} a share.`}
+      </div>
+    )
+  }
+
+  renderOpenPrice = () => {
+    return(
       <div className="stock-text">
-        {this.state.searched_stock && `$${this.state.searched_stock.latestPrice.toFixed(2)} a share.`}
+        {this.state.searched_stock.open && `$${this.state.searched_stock.open} at open.`}
       </div>
     )
   }
@@ -62,10 +68,8 @@ class NewStock extends Component {
       return response.json()
     })
     .then(stockinfo => {
-      console.log(stockinfo)
       const stock_price = stockinfo.latestPrice
       const total_cost = stock_price * this.state.quantity
-      this.props.updateNewStock(total_cost)
       if (total_cost > this.state.balance){
         window.confirm(`You do not have enought to purchase ${this.state.quantity} shares of ${this.state.ticker_symbol}. Please lower your quantity.`)
       } else {
@@ -85,6 +89,7 @@ class NewStock extends Component {
         })
         .then( resp => resp.json())
         .then( tra => {
+          this.props.updateNewStock(total_cost)
           this.props.updateTransaction({ticker_symbol: tra.transaction.ticker_symbol, shares: tra.transaction.shares }, total_cost, tra)
           this.props.updateBudget(total_cost)
         })
@@ -117,6 +122,7 @@ class NewStock extends Component {
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}>
           <input
+            onChange={this.handleChange}
             className="form-input"
             id="ticker_symbol"
             placeholder="Ticker"
@@ -124,6 +130,7 @@ class NewStock extends Component {
             required/>
           <br/>
           <input
+            onChange={this.handleChange}
             className="form-input"
             id="quantity"
             placeholder="quantity"
@@ -132,10 +139,11 @@ class NewStock extends Component {
             min="1"
             value={this.state.quantity}
             required/>
-            <input
-              className="button"
-              type="submit"
-              value="Buy"/>
+          <input
+            onChange={this.handleChange}
+            className="button"
+            type="submit"
+            value="Buy"/>
         </form>
         </div>
         <div className="stock-render-info">
@@ -143,6 +151,7 @@ class NewStock extends Component {
         <br/>
         {this.state.searched_stock && this.renderStockCompany()}
         {this.state.searched_stock && this.renderStockPrice()}
+        {this.state.searched_stock && this.renderOpenPrice()}
         </div>
       </div>
     );
