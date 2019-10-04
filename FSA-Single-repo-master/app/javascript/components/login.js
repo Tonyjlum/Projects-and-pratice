@@ -6,6 +6,10 @@ class Login extends Component {
     email: "",
     password: "",
 }
+  //clears user at logout
+  componentDidMount(){
+    this.props.clearUser()
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -76,7 +80,6 @@ class Login extends Component {
       </div>
     );
   }
-
 }
 
-export default withRouter((Login));
+export default withRouter(Login)

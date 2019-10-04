@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   namespace :v1, defaults: { format: 'json'} do
     # get 'users', to: 'users#index'
-    resources :transactions
-    resources :users
-    resources :stocks
+    resources :transactions, only: [:index, :show, :create]
+    resources :users, only: [:index, :show, :create, :login]
+    resources :stocks, only: [:index, :show]
 
     post "/login", to:"users#login"
     post "/register", to:"users#create"

@@ -3,18 +3,11 @@ import { withRouter } from 'react-router-dom'
 import Transaction from './transaction'
 import NavBar from './navbar'
 
-
 class TransactionContainer extends PureComponent {
   state = {
     transactions: []
   }
 
-
-  renderTransactions= () => {
-    return this.state.transactions.map( transaction => {
-      return <Transaction key={transaction.id} transaction={transaction}/>
-    })
-  }
   componentDidMount(){
     fetch(`http://localhost:3000/v1/users/${this.props.user.id}`)
     .then(resp => resp.json())
@@ -23,6 +16,11 @@ class TransactionContainer extends PureComponent {
     })
   }
 
+  renderTransactions= () => {
+    return this.state.transactions.map( transaction => {
+      return <Transaction key={transaction.id} transaction={transaction}/>
+    })
+  }
 
   render() {
     if (this.props.user.id === 0) { this.props.history.push("/") }
@@ -35,9 +33,8 @@ class TransactionContainer extends PureComponent {
           {this.renderTransactions()}
         </div>
       </div>
-    );
+    )
   }
-
 }
 
-export default withRouter(TransactionContainer);
+export default withRouter(TransactionContainer)

@@ -1,9 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import '../app.css';
-// import { Provider } from "react-redux"
-//Many problems could have been resolved with React.
-
 
 import {BrowserRouter, Switch, Route} from "react-router-dom"
 
@@ -60,13 +57,22 @@ class App extends React.Component {
     })
   }
 
+  clearUser = () => {
+    this.setState({
+      id: 0,
+      user: null,
+      budget: 0,
+      transactions: []
+    })
+  }
+
 
 
   render () {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={() => <Login setUser={this.setUser}/>} />
+          <Route exact path="/" render={() => <Login setUser={this.setUser} clearUser={this.clearUser}/>}  />
           <Route exact path="/register" render={() => <Register />}/>
           <Route exact path="/portfolio" render ={() => <Portfolio user={this.state} updateBudget = {this.updateBudget} updateTransaction = {this.updateTransaction}/>}/>
           <Route eact path="/transactions" render={() => <TransactionContainer user={this.state}/>}/>

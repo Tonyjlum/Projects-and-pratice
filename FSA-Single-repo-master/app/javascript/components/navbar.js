@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 class Navbar extends Component {
 
+  //push the user to links depending on which button was pressed.
   handleClick= (e) => {
     this.props.history.push(`/${e.target.id}`)
   }
@@ -19,4 +20,4 @@ class Navbar extends Component {
 
 }
 
-export default withRouter((Navbar));
+export default withRouter(Navbar)

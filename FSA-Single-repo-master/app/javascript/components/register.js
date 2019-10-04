@@ -6,7 +6,7 @@ class Register extends Component {
     email: "",
     password: "",
     name: ""
-}
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -40,7 +40,6 @@ class Register extends Component {
         window.confirm(`That Email address is already in use. Please login with ${this.state.email} or try a different email.`)
       }
     })
-
   }
 
   render() {
@@ -83,9 +82,8 @@ class Register extends Component {
           onClick={this.handleLogin}
         >Login</button>
       </div>
-    );
+    )
   }
-
 }
 
-export default withRouter((Register));
+export default withRouter(Register)

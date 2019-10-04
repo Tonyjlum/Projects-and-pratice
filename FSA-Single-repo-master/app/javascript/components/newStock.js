@@ -15,7 +15,6 @@ class NewStock extends Component {
     this.setState({
       [e.target.id]: e.target.value
     }, () => this.handleConstantRenderStock())
-
   }
 
   handleConstantRenderStock = () => {
@@ -59,7 +58,7 @@ class NewStock extends Component {
       </div>
     )
   }
-  renderNumberOfStocksUserCan = () =>{
+  renderNumberOfStocksUserCan = () => {
     const max = this.props.balance/this.state.searched_stock.latestPrice.toFixed(2)
     if (Math.floor(max) > 0){
       return(
@@ -70,7 +69,6 @@ class NewStock extends Component {
     } else {
       return(<div className="stock-text red-text">You cannot buy any shares of this stock!</div>)
     }
-
   }
 
   handleSubmit = (e) => {
@@ -119,7 +117,6 @@ class NewStock extends Component {
     })
     .catch( err => {
         window.alert(`${this.state.ticker_symbol} is an invalid ticker symbol. Please try again.`)
-
     })
   }
 
@@ -127,51 +124,47 @@ class NewStock extends Component {
     return (
       <div className="new-stock-form">
         {`Cash - $${this.state.balance && this.state.balance.toFixed(2)}`}
-        <br/>
-        <br/>
+        <br/><br/>
         <div>
-        <form
-          className= ""
-          onChange={this.handleChange}
-          onSubmit={this.handleSubmit}>
-          <input
+          <form
+            className= ""
             onChange={this.handleChange}
-            className="form-input"
-            id="ticker_symbol"
-            placeholder="Ticker"
-            value={this.state.ticker_symbol.toUpperCase()}
-            required/>
-          <br/>
-          <input
-            onChange={this.handleChange}
-            className="form-input"
-            id="quantity"
-            placeholder="quantity"
-            type="number"
-            step="1"
-            min="1"
-            value={this.state.quantity}
-            required/>
-          <input
-            onChange={this.handleChange}
-            className="button"
-            type="submit"
-            value="Buy"/>
-        </form>
+            onSubmit={this.handleSubmit}>
+            <input
+              onChange={this.handleChange}
+              className="form-input"
+              id="ticker_symbol"
+              placeholder="Ticker"
+              value={this.state.ticker_symbol.toUpperCase()}
+              required/>
+            <br/>
+            <input
+              onChange={this.handleChange}
+              className="form-input"
+              id="quantity"
+              placeholder="quantity"
+              type="number"
+              step="1"
+              min="1"
+              value={this.state.quantity}
+              required/>
+            <input
+              onChange={this.handleChange}
+              className="button"
+              type="submit"
+              value="Buy"/>
+          </form>
         </div>
         <div className="stock-render-info">
-        <br/>
-        <br/>
-
-        {this.state.searched_stock && this.renderNumberOfStocksUserCan()}
-        {this.state.searched_stock && this.renderStockCompany()}
-        {this.state.searched_stock && this.renderStockPrice()}
-        {this.state.searched_stock && this.renderOpenPrice()}
+          <br/><br/>
+          {this.state.searched_stock && this.renderNumberOfStocksUserCan()}
+          {this.state.searched_stock && this.renderStockCompany()}
+          {this.state.searched_stock && this.renderStockPrice()}
+          {this.state.searched_stock && this.renderOpenPrice()}
         </div>
       </div>
-    );
+    )
   }
-
 }
 
-export default NewStock;
+export default NewStock
