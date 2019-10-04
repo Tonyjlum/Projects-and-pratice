@@ -1,25 +1,13 @@
-# README
+# Fullstack Assessment - Stock Exchange
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
+To install the apps dependencies, use: bundle install. The app runs on Ruby 2.5.3. If you run into issues with the ruby version, try changing the ruby version with the Ruby Version Manager: rvm 2.5.3. If you do not have this particular version of ruby installed, you can run rvm install 2.5.3.
 
-Things you may want to cover:
+Run bundle install and npm install to download dependencies.
 
-* Ruby version
+Run rails db:migrate to migrate the database.
+Run rails db:seed to have some sample cases set up in the database.
 
-* System dependencies
+You can start up the server with rails server.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# FSA-Single-repo
+rails console will open the rails console and quit will exit the console.

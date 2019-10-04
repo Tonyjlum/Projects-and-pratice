@@ -22,7 +22,7 @@ class PortfolioStockDisplay extends Component {
 
   render() {
     return (
-      <div className={`stock-display display-flex ${this.state.price > this.state.open && "green-text"} ${this.state.price < this.state.open && "red-text"}`}>
+      <div className={`stock-display display-flex ${this.state.price > this.state.open && "green-text"} ${this.state.price < this.state.open && "red-text"} ${this.state.price == this.state.open && "grey-text"}`}>
         {this.state.price > this.state.open && "⬆️"}
         {this.state.price == this.state.open && "⬜"}
         {this.state.price < this.state.open && "⬇️"}

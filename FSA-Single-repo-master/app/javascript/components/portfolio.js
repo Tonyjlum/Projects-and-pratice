@@ -25,6 +25,7 @@ class Portfolio extends PureComponent {
     })
   }
   }
+  
   updateNewStock = (price) => {
     this.setState({total_price: this.state.total_price + price})
   }

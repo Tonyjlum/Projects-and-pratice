@@ -132,6 +132,9 @@ Body {
 .green-text{
   color: green
 }
+.grey-text{
+  color: grey
+}
 
 .overflow{
   overflow-y: scroll;

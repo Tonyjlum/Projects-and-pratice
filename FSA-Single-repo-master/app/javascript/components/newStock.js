@@ -47,7 +47,7 @@ class NewStock extends Component {
   renderStockPrice = () => {
     return(
       <div className="stock-text ">
-        {this.state.searched_stock.latestPrice && `$${this.state.searched_stock.latestPrice} a share.`}
+        {this.state.searched_stock.latestPrice && `$${this.state.searched_stock.latestPrice.toFixed(2)} a share.`}
       </div>
     )
   }
@@ -55,9 +55,22 @@ class NewStock extends Component {
   renderOpenPrice = () => {
     return(
       <div className="stock-text">
-        {this.state.searched_stock.open && `$${this.state.searched_stock.open} at open.`}
+        {this.state.searched_stock.open && `$${this.state.searched_stock.open.toFixed(2)} at open.`}
       </div>
     )
+  }
+  renderNumberOfStocksUserCan = () =>{
+    const max = this.props.balance/this.state.searched_stock.latestPrice.toFixed(2)
+    if (Math.floor(max) > 0){
+      return(
+        <div className="stock-text green-text">
+          {this.state.searched_stock.latestPrice && `You can purchase up to ${Math.floor(max)} ${max > 1 ? "shares" : "share"}.`}
+        </div>
+      )
+    } else {
+      return(<div className="stock-text red-text">You cannot buy any shares of this stock!</div>)
+    }
+
   }
 
   handleSubmit = (e) => {
@@ -70,7 +83,7 @@ class NewStock extends Component {
     .then(stockinfo => {
       const stock_price = stockinfo.latestPrice
       const total_cost = stock_price * this.state.quantity
-      if (total_cost > this.state.balance){
+      if (total_cost > this.state.balance || this.state.quantity == 0){
         window.confirm(`You do not have enought to purchase ${this.state.quantity} shares of ${this.state.ticker_symbol}. Please lower your quantity.`)
       } else {
         fetch("http://localhost:3000/v1/transactions", {
@@ -126,7 +139,7 @@ class NewStock extends Component {
             className="form-input"
             id="ticker_symbol"
             placeholder="Ticker"
-            value={this.state.ticker_symbol}
+            value={this.state.ticker_symbol.toUpperCase()}
             required/>
           <br/>
           <input
@@ -149,6 +162,8 @@ class NewStock extends Component {
         <div className="stock-render-info">
         <br/>
         <br/>
+
+        {this.state.searched_stock && this.renderNumberOfStocksUserCan()}
         {this.state.searched_stock && this.renderStockCompany()}
         {this.state.searched_stock && this.renderStockPrice()}
         {this.state.searched_stock && this.renderOpenPrice()}
