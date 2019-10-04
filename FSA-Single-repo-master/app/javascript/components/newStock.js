@@ -24,6 +24,7 @@ class NewStock extends Component {
       return response.json()
     })
     .then(stockinfo => {
+      console.log(stockinfo)
       const stock_price = stockinfo.latestPrice
       const total_cost = stock_price * this.state.quantity
       this.props.updateNewStock(total_cost)
