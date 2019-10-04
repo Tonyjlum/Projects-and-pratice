@@ -7,13 +7,51 @@ class NewStock extends Component {
     quantity: 0,
     price: 0,
     balance: this.props.balance,
-    user_id: this.props.user_id
+    user_id: this.props.user_id,
+    searched_stock: null
   }
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
+    }, () => this.handleConstantRenderStock())
+
+  }
+
+  handleConstantRenderStock = () => {
+    fetch(`https://cloud.iexapis.com/stable/stock/${this.state.ticker_symbol}/quote?token=sk_69abc46b0d5346b2999a5d51f1377ea7`)
+    .then( response => {
+      if (!response.ok) { throw response }
+      return response.json()
     })
+    .then( stock => {
+      console.log(stock)
+      this.setState({
+        searched_stock: stock
+      })
+    })
+    .catch(err => {
+      console.log("error")
+      this.setState({
+        searched_stock:  null
+      })
+    })
+  }
+
+  renderStockCompany = () => {
+    return(
+      <div className="stock-text">
+        {this.state.searched_stock && `${this.state.searched_stock.companyName}(${this.state.searched_stock.symbol})`}
+      </div>
+    )
+  }
+
+  renderStockPrice = () => {
+    return(
+      <div className="stock-text">
+        {this.state.searched_stock && `$${this.state.searched_stock.latestPrice.toFixed(2)} a share.`}
+      </div>
+    )
   }
 
   handleSubmit = (e) => {
@@ -55,7 +93,8 @@ class NewStock extends Component {
             ticker_symbol: "",
             quantity: 0,
             price: 0,
-            balance: this.state.balance - total_cost
+            balance: this.state.balance - total_cost,
+            searched_stock: null
           })
         })
       }
@@ -98,6 +137,12 @@ class NewStock extends Component {
               type="submit"
               value="Buy"/>
         </form>
+        </div>
+        <div className="stock-render-info">
+        <br/>
+        <br/>
+        {this.state.searched_stock && this.renderStockCompany()}
+        {this.state.searched_stock && this.renderStockPrice()}
         </div>
       </div>
     );

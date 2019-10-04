@@ -154,7 +154,16 @@ Body {
   width: 40vw;
 }
 .new-stock-form{
-  margin-top: 25%;
+  margin-top: 5%;
   float: right;
   clear: both;
+}
+
+
+.stock-text{
+  font-size: 20px;
+}
+
+.stock-render-info {
+  width: 28vw;
 }
